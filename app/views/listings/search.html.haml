@@ -1,0 +1,64 @@
+%h1 Search Results
+%button.btn.btn-primary.collapse.multi-collapse{:class => ("show" unless @is_advanced_search), id: "show-advanced-search", type: "button", "data-toggle" => "collapse", "data-target" => ".multi-collapse", "aria-expanded" => "false", "aria-controls" => "show-advanced-search advanced-search-form"} Advanced Search
+.collapse.multi-collapse{id: "advanced_search_form"}
+    = form_tag search_path, :method => :get do
+        .card-body
+            = hidden_field_tag(:title, params[:title])
+            = hidden_field_tag(:category, params[:category])
+            .form-group.d-flex.flex-row#price
+                .d-flex.flex-column.m-2
+                    %label{for: "price-lb"} Min Price:
+                    .input-group
+                        .input-group-prepend
+                            %span.input-group-text £
+                        = number_field_tag 'lower_bound_price', params[:lower_bound_price], placeholder: '£ Min', min: 0, class: "form-control", id: "price-lb"
+                .d-flex.flex-column.m-2
+                    %label{for: "price-ub"} Max Price:
+                    .input-group
+                        .input-group-prepend
+                            %span.input-group-text £
+                        = number_field_tag 'upper_bound_price', params[:upper_bound_price], placeholder: '£ Max', min: 0, class: "form-control", id: "price-ub"
+            // Search filters
+            .form-group#payment-options
+            %p.m-0 Payment:
+            %select{id: "payment-options-select", name: "payment_options[]", multiple: "multiple"}
+                - ListingContent::PAYMENT_OPTIONS.each do |payment_option|
+                    %option{value: payment_option, selected: (!params[:payment_options].nil? && (params[:payment_options].include? payment_option))} #{payment_option}
+            .form-group#delivery-options
+            %p.m-0 Delivery:
+            %select{id: "delivery-options-select", name: "delivery_options[]", multiple: "multiple"}
+                - ListingContent::DELIVERY_OPTIONS.each do |delivery_option|
+                    %option{value: delivery_option, selected: (!params[:delivery_options].nil? && (params[:delivery_options].include? delivery_option))} #{delivery_option}
+            .form-group#condition-options
+            %p.m-0 Condition:
+            %select{id: "condition-options-select", name: "condition_options[]", multiple: "multiple"}
+                - ListingContent::CONDITIONS.each do |condition_option|
+                    %option{value: condition_option, selected: (!params[:condition_options].nil? && (params[:condition_options].include? condition_option))} #{condition_option}
+            .form-group#location-options
+            %p.m-0 Location:
+            %select{id: "location-options-select", name: "location_options[]", multiple: "multiple"}
+                - ListingContent::LOCATION_OPTIONS.each do |location_option|
+                    %option{value: location_option, selected: (!params[:location_options].nil? && (params[:location_options].include? location_option))} #{location_option}
+        
+        .card-footer
+            - if !@is_advanced_search
+                %button.btn.btn-danger{id: "hide-advanced-search", type: "button", "data-toggle" => "collapse", "data-target" => ".multi-collapse", "aria-expanded" => "false", "aria-controls" => "show-advanced-search advanced-search-form"} Hide
+            = submit_tag "Apply filters", class: "btn btn-primary"
+
+- if !@search_listings.empty? 
+    // Display search results
+    .row.justify-content-start
+        - @search_listings.each do |listing|
+            .col-lg-4.col-md-6.mb-4
+                - listing_content = listing.listing_content(approved= true)
+                .card.p-3.border-0
+                    = link_to listing do
+                        .card-body.p-0
+                            .square-div.mb-2
+                                = image_tag("#{listing_content.listing_url}", class: 'card-img-top cropped-image')
+                            .left-right.text-muted.mb-2
+                                %span= listing_content.category.name
+                                %span.text-secondary= listing_content.display_price
+                            %h5.text-dark.line-clamp-2.pb-1= listing_content.title
+- else
+    %p No results found

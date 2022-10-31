@@ -1,0 +1,33 @@
+.listing_div {
+  transition-duration: 0.5s;
+  padding: 4%;
+  border-radius: 8px;
+  text-align: right;
+}
+
+.listing_div:hover {
+  background-color: rgb(223, 222, 222);
+}
+
+#review-listing-list-container .clicked {
+  background-color: rgb(223, 222, 222);
+}
+
+#review-listing-list-container {
+  max-height: calc(100vh - 325px);
+  overflow-y: auto;
+}
+
+#review-listing-list {
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.review-listing-button{
+  width: 32%;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}

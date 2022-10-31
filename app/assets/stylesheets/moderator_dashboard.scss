@@ -1,0 +1,15 @@
+@media only screen and (max-width: 991px) { 
+    #moderator-statistics { /* Only show statistics panel on desktops */
+      display: none !important;
+    } 
+}
+
+#moderator-utilities{
+    text-align: center;
+}
+#moderator-utilities, #moderator-statistics{
+    padding: 15px;
+}
+.moderator-function-table{
+    max-height: 50vh;
+}

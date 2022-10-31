@@ -1,0 +1,230 @@
+Foundation by Izaak Asimov:
+  created_at: "2021-04-02 13:36:22"
+  updated_at: "2021-04-02 13:36:22"
+  user: "aca19sak"
+  listing_content_versions:
+    - title: "Foundation by Izaak Asimov"
+      description: "Isaac Asimov’s Foundation series is one of his earliest and best-known works, which he began when he was only twenty-one. It helped to redefine the science fiction genre with its seamless interweaving of science fact with fiction. Foundation is set in the future, when the world is barely remembered, and humans have colonized the galaxy. The book introduces Hari Seldon, a brilliant visionary and psychohistorian whose job is to use mathematics and probability to predict the future. Seldon does not have the ability to prevent the decline of humanity that he predicts. Instead, he gathers together the galaxy’s top scientists and scholars on a bleak outer planet and sets out to preserve the accumulated knowledge of humankind, and begin a new civilization based on art, science, and technology. He calls his sanctuary the Foundation and designs it to withstand a dark age of ignorance, barbarism, and warfare he predicts will last for 30,000 years. But not even Hari has foreseen the intense barbarism lurking in space or the birth of an extraordinary creature whose mutant intelligence will destroy all he holds dear. \n With his scientist-populated Foundation, Asimov became one of the first writers to theorize that atomic power would revolutionize society. In addressing the ways in which the Foundation responds to the problems Seldon has predicted, the author raises issues about traditional religion as the controlling drug of the masses, and the rise of science as the new faith for humankind."
+      category: "Books"
+      price: 4.0
+      location: "Sheffield"
+      post_code: "S10"
+      delivery_options: ["Collection", "In Person Delivery"]
+      condition: "Well Used"
+      payment_options: ["Cash"]
+      images: ["db/seeds/images/foundation_book.jpg"]
+Holes by Louis Sachar:
+  created_at: "2021-03-01 16:46:22"
+  updated_at: "2021-03-01 16:46:22"
+  user: "aca19sak"
+  listing_content_versions:
+    - title: "Holes by Louis Sachar"
+      description: "Stanley Yelnats is under a curse. A curse that began with his no-good-dirty-rotten-pig-stealing-great-great-grandfather and has since followed generations of Yelnatses. Now Stanley has been unjustly sent to a boys’ detention center, Camp Green Lake, where the boys build character by spending all day, every day digging holes exactly five feet wide and five feet deep. There is no lake at Camp Green Lake. But there are an awful lot of holes. \n It doesn’t take long for Stanley to realize there’s more than character improvement going on at Camp Green Lake. The boys are digging holes because the warden is looking for something. But what could be buried under a dried-up lake? Stanley tries to dig up the truth in this inventive and darkly humorous tale of crime and punishment—and redemption."
+      category: "Books"
+      price: 6.0
+      location: "Sheffield"
+      post_code: "S31"
+      delivery_options: ["Collection", "Postal Delivery"]
+      condition: "Slightly Used"
+      payment_options: ["Bank Transfer", "Paypal", "Swap"]
+      images: ["db/seeds/images/holes_book.jpg"]
+Mellon Socks:
+  created_at: "2021-03-01 23:30:23"
+  updated_at: "2021-03-01 23:30:23"
+  user: "aca19sak"
+  listing_content_versions:
+    - title: "Mellon Socks"
+      description: "Socks that have this cool mellon design on them."
+      category: "Clothing"
+      price: 5.0
+      location: "Sheffield"
+      post_code: "S01"
+      delivery_options: ["Collection", "Postal Delivery", "In Person Delivery"]
+      condition: "Slightly Used"
+      payment_options: ["Cash", "Bank Transfer", "Paypal", "Swap"]
+      images: ["db/seeds/images/mellon_socks.jpg"]
+Gell Ink Pen:
+  created_at: "2021-03-20 23:30:23"
+  updated_at: "2021-03-20 23:30:23"
+  user: "acb19kt"
+  listing_content_versions:
+    - title: "Gell Ink Pen"
+      description: "Gell ink pen that writes very smooth, only a little chewed."
+      category: "Stationary"
+      price: 0.5
+      location: "International"
+      delivery_options: ["Postal Delivery"]
+      condition: "Slightly Used"
+      payment_options: ["Bank Transfer", "Paypal"]
+      images: ["db/seeds/images/pen.jpg"]
+Modern Stapler:
+  created_at: "2021-03-20 23:32:33"
+  updated_at: "2021-03-20 23:32:33"
+  user: "acb19kt"
+  listing_content_versions:
+    - title: "Modern Desktop Stapler"
+      description: "A stapler built for the modern workplace, say goodbye to your terrible old stapler, here is the new best thing."
+      category: "Stationary"
+      price: 6.0
+      location: "International"
+      delivery_options: ["Postal Delivery"]
+      condition: "New"
+      payment_options: ["Bank Transfer", "Paypal"]
+      images: ["db/seeds/images/stapler.jpg"]
+Anker Power Bank:
+  created_at: "2021-02-20 23:34:33"
+  updated_at: "2021-02-20 23:34:33"
+  user: "aca18mj"
+  listing_content_versions:
+    - title: "Anker Power Bank"
+      description: "Power bank that can hold 2-3 modern phone charges with indicator lights."
+      category: "Electronics"
+      price: 12
+      location: "International"
+      delivery_options: ["Postal Delivery"]
+      condition: "Slightly Used"
+      payment_options: ["Bank Transfer", "Paypal", "Swap"]
+      images: ["db/seeds/images/anker_power_bank.jpg"]
+Bottle Opener:
+  created_at: "2021-02-21 23:32:33"
+  updated_at: "2021-02-21 23:32:33"
+  user: "aca18mj"
+  listing_content_versions:
+    - title: "Bottle Opener"
+      description: "Bottle opener that can open corks and caps."
+      category: "Kitchenware"
+      price: 0
+      location: "International"
+      delivery_options: ["Postal Delivery"]
+      condition: "Slightly Used"
+      payment_options: ["Swap"]
+      images: ["db/seeds/images/bottle_opener.jpg"]
+Cheese Grater:
+  created_at: "2021-02-22 23:32:33"
+  updated_at: "2021-02-22 23:32:33"
+  user: "acf19ma"
+  listing_content_versions:
+    - title: "Cheese Grater"
+      description: "Cheese grater with a removable catch container."
+      category: "Kitchenware"
+      price: 4
+      location: "Sheffield"
+      delivery_options: ["Postal Delivery"]
+      condition: "Slightly Used"
+      payment_options: ["Bank Transfer"]
+      images: ["db/seeds/images/cheese_grater.jpg"]
+Old Laptop:
+  created_at: "2021-02-23 23:32:33"
+  updated_at: "2021-02-23 23:32:33"
+  user: "acf19ma"
+  listing_content_versions:
+    - title: "Old Laptop"
+      description: "It's an old laptop, slow as all hell, but it will get the job done in a pinch. Batery is shot."
+      category: "Electronics"
+      price: 0
+      location: "Sheffield"
+      post_code: "S13"
+      delivery_options: ["Collection", "In Person Delivery"]
+      condition: "Slightly Used"
+      payment_options: ["Swap"]
+      images: ["db/seeds/images/laptop.jpg"]
+Packing Tape:
+  created_at: "2021-02-24 23:32:33"
+  updated_at: "2021-02-24 23:32:33"
+  user: "aca18ncc"
+  listing_content_versions:
+    - title: "Packing Tape"
+      description: "Got too much of this, have some if you want lol."
+      category: "Stationary"
+      price: 0
+      location: "Sheffield"
+      post_code: "S17"
+      delivery_options: ["Collection"]
+      condition: "Slightly Used"
+      payment_options: []
+      images: ["db/seeds/images/packing_tape.jpg"]
+Pentaho Rucksack:
+  created_at: "2021-02-25 23:32:33"
+  updated_at: "2021-02-25 23:32:33"
+  user: "aca18ncc"
+  listing_content_versions:
+    - title: "Pentaho Rucksack"
+      description: "Decent rucksack, no age showing on it despite being 2 years old."
+      category: "Clothing"
+      price: 0
+      location: "Sheffield"
+      post_code: "S20"
+      delivery_options: ["Collection"]
+      condition: "Slightly Used"
+      payment_options: []
+      images: ["db/seeds/images/rucksack.jpg"]
+Sewing Kit:
+  created_at: "2021-02-26 23:32:33"
+  updated_at: "2021-02-26 23:32:33"
+  user: "aca19tjw"
+  listing_content_versions:
+    - title: "Sewing Kit"
+      description: "Found this and thought it would be more use to someone else."
+      category: "Stationary"
+      price: 0
+      location: "UK"
+      delivery_options: ["Collection"]
+      condition: "New"
+      payment_options: []
+      images: ["db/seeds/images/sewing_kit.jpg"]
+Sharky Mug:
+  created_at: "2021-02-27 23:32:33"
+  updated_at: "2021-02-27 23:32:33"
+  user: "aca19tjw"
+  listing_content_versions:
+    - title: "Sharky Mug"
+      description: "Look at the cute shark uwu."
+      category: "Kitchenware"
+      price: 6
+      location: "UK"
+      delivery_options: ["Collection"]
+      condition: "New"
+      payment_options: ["Swap", "Bank Transfer", "Paypal"]
+      images: ["db/seeds/images/sharky_mug.jpg"]
+Tomato and Basil Soup:
+  created_at: "2021-02-28 23:32:33"
+  updated_at: "2021-02-28 23:32:33"
+  user: "aca19tjw"
+  listing_content_versions:
+    - title: "Tomato and Basil Soup"
+      description: "Some soup I'm never going to use."
+      category: "Food"
+      price: 0
+      location: "UK"
+      delivery_options: ["Collection"]
+      condition: "New"
+      payment_options: ["Swap"]
+      images: ["db/seeds/images/soup.jpg"]
+Western Digital 3TB Hard Disk:
+  created_at: "2021-02-29 13:32:33"
+  updated_at: "2021-02-29 13:32:33"
+  user: "aca19sak"
+  listing_content_versions:
+    - title: "Western Digital 3TB Hard Disk"
+      description: "Old Western Digital hard disk, is quite slow but heyo 3GB for those steam games you don't play."
+      category: "Electronics"
+      price: 0
+      location: "UK"
+      delivery_options: ["Collection"]
+      condition: "Well Used"
+      payment_options: ["Swap"]
+      images: ["db/seeds/images/wd_3TB_drive.jpg"]
+Wireless Logitech Keyboard:
+  created_at: "2021-02-29 17:32:33"
+  updated_at: "2021-02-29 17:32:33"
+  user: "aca19sak"
+  listing_content_versions:
+    - title: "Wireless Logitech Keyboard"
+      description: "Keyboard with a wireless USB key."
+      category: "Electronics"
+      price: 0
+      location: "UK"
+      delivery_options: ["Collection"]
+      condition: "Well Used"
+      payment_options: ["Swap"]
+      images: ["db/seeds/images/wireless_keyboard.jpg"]

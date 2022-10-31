@@ -1,0 +1,59 @@
+@media only screen and (max-width: 767px) { 
+    #conversations-tip { /* Only show conversation tip on desktops */
+      display: none !important; 
+    } 
+}
+.conversations-list .bg-light-green:hover{
+    background-color: rgba(255,255,255,0.2)
+}
+.conversations-list{
+    overflow:auto;
+    height: calc(100vh - 385px);
+}
+
+.conversations-window{
+    position:relative;
+    top: -3vh;
+}
+
+#chat-box {
+    height: calc(100vh - 385px);
+    min-height: 200px;
+    //border: solid 1px #DCDCDC;
+    background-color: #FFF;
+    overflow-y: auto;
+  }
+
+.conversations-input-box input {
+    border-radius: 0 !important;
+    color: #fff !important;
+    background-color: #579532 !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+.conversations-input-box input::placeholder {
+    color: rgba(255,255,255,0.7) !important;
+}
+.conversations-send-icon{
+    font-size: 1.35rem;
+}
+#conversations-send-button{
+    display: inline-flex;
+    align-items: center;
+}
+.conversations-top-row{
+    font-size:1.35rem;
+}
+.conversations-window .col-9{
+    padding-right: 0 !important;
+}
+.conversations-window .row{
+    margin-right: 0 !important;
+}
+.conversation-name{
+    color: rgba(255,255,255,1.0)
+}
+.conversation-name:hover{
+    transition: color 0.1s;
+    color: rgba(255,255,255,0.85)
+}

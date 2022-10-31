@@ -1,0 +1,28 @@
+// Image carousel partial view for viewing/reviewing listings
+.modal.hide.fade.modal-image#image-carousel-modal{:role => "dialog", :aria-hidden => "true"}
+    .modal-dialog.modal-dialog-centered.modal-image-dialog.justify-content-center{:role => "document"}
+        .modal-content.modal-image-content
+            .modal-body.modal-image-body
+                .carousel.slide#image-carousel{"data-ride" => "carousel"}
+                    // If there is more than one image, display slider bar at the bottom
+                    -if @urls.count > 1
+                        %ol.carousel-indicators
+                            %li.active{"data-target" => "image-carousel", "data-slide-to" => "0"}
+                            -@urls.drop(1).map.with_index do
+                                %li{"data-target" => "image-carousel", "data-slide-to" => -'#{index}'}
+                    .carousel-inner
+                        .carousel-item.active
+                            // Add first image to carousel and set it as 'active'
+                            = image_tag("#{@urls.first}", class: "modal-carousel-image")
+                        -@urls.drop(1).each do |url|
+                            // Add all images to the carousel (apart from the first one which has already been added)
+                            .carousel-item 
+                                = image_tag("#{url}", class: "modal-carousel-image")
+                    // If there is more than one image, display left / right arrows
+                    -if @urls.count > 1
+                        =link_to "#image-carousel", "data-slide" => "prev", role: "button", class: "carousel-control-prev" do
+                            %span.carousel-control-prev-icon{:aria-hidden => "true"}
+                            %span.sr-only Previous
+                        =link_to "#image-carousel", "data-slide" => "next", role: "button", class: "carousel-control-next" do
+                            %span.carousel-control-next-icon{:aria-hidden => "true"}
+                            %span.sr-only Next

@@ -1,0 +1,96 @@
+// alert showed after successful policy update (hidden at the beggining)
+.div{:id => "submit_alert", :class => "environment-notive alert alert-info"}
+    Policy updated. View the policy page
+    = link_to "/policies/" + @policy.to_s do
+        here
+                        
+- if @policy.eql? "covid-19"
+    %h1= "Editing Covid-19 policy"
+- else
+    %h1= "Editing site policy"
+
+= form_with url:"/policies/update/#{@policy}", id: "markdown_form" do |form|
+    .form-group
+        %textarea{:id => "markdown_raw", :name => "markdown", :class => "form-control", :rows => "20"}=@markdown_raw
+    
+    %button{:type => "button", :class => "btn btn-dark mb-2", :onclick => "markdown_preview()"} Preview
+    =form.submit "Submit", class: "btn btn-primary mb-2", id: "submit_button"
+    %button{:type => "button", :class => "btn btn-outline-secondary mb-2", "data-toggle"=>"modal", "data-target"=>"#how_to_modal"}How to
+
+%hr
+
+- if @policy.eql? "covid-19"
+    %h1{:class => "display-3"} Covid-19
+    %p Covid-19 guidance for buying and selling using UoS marketplace.
+    .div{:class => "alert alert-primary"}
+        For the latest updates regarding Covid-19 guidance, please visit the
+        = link_to "https://www.sheffield.ac.uk/coronavirus" do
+            official university website
+- else
+    %h1{:class => "display-3"} Site policies
+    %p Please review the website policy before selling or buying any items.
+
+.row{:id => "markdown_parsed", :class => "shadow-sm p-3 mb-3 bg-white rounded flex-column"}
+    = @markdown.render(@markdown_raw).html_safe
+
+
+
+
+// modal for markdown cheat-sheet
+.modal{:class => "fade", :tabindex => "-1", :role => "dialog", :id => "how_to_modal"}
+    .modal-dialog{:role => "document"}
+        .modal-content
+            .modal-header
+                %h5{:class => "modal-title"}Writing markdown
+                // for whatever reason button is outside the modal
+                %button{:type => "button", :class => "close", "data-dismiss" => "modal", "aria-label"=>"Close"}
+                    %span{"aria-hidden"=>"true"} &times;
+            
+            .modal-body
+                %p The editor uses special symbols to format the text
+                %table{:class => "table"}
+                    %thead
+                        %tr
+                            %th{:scope => "col"}Element
+                            %th{:scope => "col"}Markdown syntax
+                    %tbody
+                        %tr
+                            %td Heading
+                            %td
+                                ="# H1"
+                                %br
+                                ="## H2"
+                                %br
+                                ="### H3"
+                        %tr
+                            %td Bold
+                            %td="**bold text**"
+                        %tr
+                            %td Italic
+                            %td="*italicised text*"
+                        %tr
+                            %td Ordered List
+                            %td
+                                ="1. First item"
+                                %br
+                                ="2. Second item"
+                                %br
+                                ="3. Third item"
+                        %tr
+                            %td Unordered List
+                            %td
+                                ="- First item"
+                                %br
+                                ="- Second item"
+                                %br
+                                ="- Third item"
+                        %tr
+                            %td Horizontal Rule
+                            %td="---"
+                        %tr
+                            %td Link
+                            %td="[title](https://www.example.com)"
+
+            .modal-footer
+                = link_to "Full reference", "https://www.markdownguide.org/cheat-sheet/"
+                %button{:type=>"button", :class=>"btn btn-secondary", "data-dismiss"=>"modal"}Close

@@ -1,0 +1,85 @@
+!!!
+%html
+  %head
+    %title UoS Marketplace - #{content_for(:title)}
+    %meta{ name: "viewport", content: "width=device-width, initial-scale=1.0" }
+    %meta{ :'http-equiv' => 'X-UA-Compatible', content: 'IE=edge' }
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "content-type"}
+    = stylesheet_link_tag    "application", media: :all
+    = javascript_include_tag "application"
+    = favicon_link_tag "/favicon.ico"
+    = csrf_meta_tags
+
+  %body{ class: "#{environment_notice_body_class} #{controller_name} #{action_name}"}
+    .flash-messages
+      - flash.each do |name, msg|
+        - next unless name == 'alert' || name == 'notice'
+        .alert.fade.in
+          .container
+            - if name == 'notice'
+              = icon('fas', 'check', class: 'flash-success')
+            - else
+              = icon('fas', 'exclamation-triangle', class: 'flash-error')
+            = msg
+            %a{ href: '#', title: 'Hide this message', data: { dismiss: :alert } }
+              Dismiss
+
+    #wrap
+      %header
+        %nav#main-nav.navbar.navbar-dark.bg-dark-green.navbar-expand-lg.fixed-top
+          .container
+            .navbar-header
+              = link_to :root, class: 'navbar-brand hidden-sm' do
+                UoS Marketplace
+            %button.navbar-toggler{ aria: { controls: "navbar-content", expanded: false, label: "Toggle navigation" }, data: { target: "#navbar-content", toggle: "collapse" }, type: "button" }
+              %span.navbar-toggler-icon
+            .collapse.navbar-collapse#navbar-content
+              - if user_signed_in?
+                %ul.nav.navbar-nav.ml-auto
+                  - if can?(:review_list, Listing)
+                    %li.nav-item
+                      = link_to moderator_path, id: "navbar-moderator-link", class: 'nav-link', role: 'button' do
+                        = icon 'fas', 'shield-alt', 'Moderator Dashboard'
+                  %li.nav-item
+                    = link_to conversations_path, class: 'nav-link' do
+                      = icon 'fas', 'comments', 'Conversations'
+                  %li.nav-item.dropdown
+                    = link_to '#', aria: { haspopup: true, expanded: false }, data: { toggle: :dropdown }, id: 'navbar-user-link', class: 'nav-link dropdown-toggle', role: 'button' do
+                      = icon 'fas', 'user', current_user.givenname
+                      %b.caret
+                    .dropdown-menu{ aria: { labelledby: '#navbar-user-link' } }
+          
+                      = link_to user_path(id: current_user[:id]), class: 'dropdown-item', method: :get, title: "Your Profile" do
+                        = icon 'fas', 'user', 'Your Profile'
+
+                      = link_to "/listings/new", class: "dropdown-item", title: "Add Listing" do
+                        = icon 'fas', 'plus', 'Add Listing'
+                        
+                      = link_to destroy_user_session_path, class: 'dropdown-item', method: :delete, title: "Log out of the system" do
+                        = icon 'fas', 'sign-out-alt', 'Log out'
+      #spacer-box
+      - if user_signed_in?
+        #container-bar.bg-light-green
+          .container
+            .searchbar
+              = form_tag search_path, :method => :get, :class => 'd-flex justify-content-center' do
+                = select_tag "category", options_from_collection_for_select(Category.get_all, "id", "name", params[:category]), include_blank: "All categories", id: "search-bar-categories"
+                = text_field_tag(:title, params[:title], placeholder: 'Search', id: "searchbar-field", class: "form-control", autocomplete: 'off')
+                = button_tag :submit, id: "search-bar-button", class: "bg-super-light-green" do
+                  %i.fas.fa-search
+
+      = render 'layouts/environment_notice'
+
+      %main
+        #main-container.container
+
+          = yield
+      %footer.footer
+        .container.d-flex.flex-row.justify-content-between
+          %span.texted-muted.now.text-nowrap
+            University of Sheffield
+          .float-right
+            = link_to "/policies/site_policy" do
+              Site Policies        
+            = link_to "/policies/covid-19", class: "mx-4" do
+              COVID-19 Guidance

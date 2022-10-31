@@ -1,0 +1,62 @@
+.container#profile_container{"data-arg-id" => @user.id}
+
+  .row{:class => "shadow-sm p-3 mb-5 bg-white rounded"}
+    .col-sm
+      %h1{:class => "display-4"}= @user.show_user
+
+      // NOT IMPLEMENTED: rating
+      %p 3.5
+          
+
+    .col-sm{:class => "text-right profile-right-column"}
+      - if can?(:manage, @user)
+        .d-flex.flex-column
+          = link_to 'Conversations', conversations_path, class: "mb-3"
+          // NOT IMPLEMENTED: wishlist
+          = link_to 'Wishlist', root_path, class: "mb-3"
+          // NOT IMPLEMENTED: notification settings
+          = link_to 'Settings', root_path, class: "mb-3"
+          = link_to 'Delete Account', user_path(@user.id), data: { confirm: 'Are you sure?' }, method: :delete 
+      - elsif can? :ban, User
+        - if !@user.isBanned?
+          %button.btn.btn-outline-danger#ban_button{:onclick => "ban_user()"}
+            %i.fa.fa-ban
+            Ban User
+        - else
+          %button.btn.btn-outline-success#ban_button{:onclick => "unban_user()"}
+            %i.fa.fa-check-circle
+            Lift Ban
+      - else
+        = link_to @listing, class: "text-muted" do
+          %i.fas.fa-flag
+          Report this user
+
+
+  .row
+    .col-sm
+      - if can?(:manage, @user)
+        %p{:class => "text-muted"} You have <b>#{@user_listings.size}</b> items listed for sale
+      - else
+        %p{:class => "text-muted"} User has <b>#{@user_listings.size}</b> items listed for sale
+    - if can?(:manage, @user)
+      .col-sm{:class => "text-right profile-right-column"}
+        // Add new listing
+        = link_to "/listings/new" do
+          %p{:class => "text-muted"}  <b>+</b> Add Listing
+  .row
+    // Show user listings
+    - @user_listings.each do |listing|
+      - content = listing[:content]
+      - current_listing = listing[:listing]          
+      .col-lg-4.col-md-6.mb-4
+        .card.p-3.border-0
+          = link_to listing_path(current_listing.id) do
+            .card-body.p-0
+              .square-div.mb-2
+                = image_tag("#{content.image_urls.first}", class: "cropped-image") 
+              .left-right.text-muted.mb-2
+                %span= content.category.name
+                %span.text-secondary= content.display_price
+              %h5.text-dark.line-clamp-2.pb-1= content.title
+              - if listing[:pending]
+                .user-profile-pending Pending approval

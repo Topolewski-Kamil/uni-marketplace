@@ -1,0 +1,70 @@
+.card
+  .card-header
+    Edit Listing
+  = simple_form_for @listing_content, url: listing_path, html: { data: {cancel_path: listings_path}}, defaults: {class: "listing-input"} do |l|
+    .card-body
+      %h2 Listing Details
+      // Title
+      = l.input :title, input_html: {autocomplete: "off",class: 'required-details', id: 'title-field', maxlength: 250}
+      #title-limit.text-danger.new-listing-warning
+        Title character limit reached
+      // Description
+      = l.input :description, as: :text, input_html: {class: 'expandable-input required-details', id: 'description-field', maxlength: 2000}
+      #description-length-left.new-listing-warning
+      // Category
+      = l.association :category, input_html: {class: 'listing-select2 required-details'}
+      // Price
+      = l.input :price, as: :numeric, input_html: {autocomplete: "off",class: 'required-details', id: 'price', min: '0', max: '10000', step: '1'}
+      #invalid-price.text-danger.new-listing-warning
+        Invalid price: has to be within £0 - £10000 range
+        // Location
+      = l.input :location, collection: ListingContent::LOCATION_OPTIONS, input_html: {class: 'listing-select2 required-details', id: 'location'}
+      #post-code-input
+        // Post code (if applicable)
+        = l.input :post_code, label: 'Postal Code (First 3 characters)', input_html: {id: 'post-code', maxlength: 3}, type: 'hidden', required: false
+        #invalid-post-code.text-danger.new-listing-warning
+          Invalid post code
+      
+      %div
+        // Delivery options
+        - ListingContent::DELIVERY_OPTIONS.each do |option| 
+          - if ((!@listing_content.delivery_options.nil?) && (@listing_content.delivery_options.include? option))
+            = check_box :listing_content, :delivery_options, {multiple: true, checked: true, :class=> 'required-options'}, option, nil
+          - else
+            = check_box :listing_content, :delivery_options, {multiple: true, :class=> 'required-options'}, option, nil
+          = option
+      %p
+      %h2.my-4 Optional Details
+      // Moderators cannot edit listing images
+      - if !@mod_editing
+        %div
+          %p
+            // Images
+            = l.label :photos
+            = l.file_field :new_images, multiple: true
+      %div
+        %br
+        = l.hidden_field :images_to_delete, value: @deleted_image_ids
+        - @listing_content.images.each do |image|
+          - if !(@deleted_image_ids.include? image.signed_id)
+            = link_to image_tag("#{rails_blob_path(image.blob, disposition: "image", only_path: true)}", :size => "200x150", :class => 'image_link'), delete_image_path(image_ids: [@deleted_image_ids,[image.signed_id]]), id: "image_link#{image.id}"
+            = l.hidden_field :images, multiple: true, value: image.signed_id
+      %p
+        // Condition
+        = l.label :condition
+        = l.select :condition, ListingContent::CONDITIONS, {}, {selected: @listing_content.condition, include_blank: true, class: "listing-select2"}
+      
+      %div
+        // Payment options
+        - ListingContent::PAYMENT_OPTIONS.each do |option| 
+          - if ((!@listing_content.payment_options.nil?) && (@listing_content.payment_options.include? option))
+            = check_box :listing_content, :payment_options, {multiple: true, checked: true}, option, nil
+          - else
+            = check_box :listing_content, :payment_options, {multiple: true}, option, nil
+          = option
+
+    .card-footer.d-flex.justify-content-between
+      = l.button :submit, class: "btn-primary", id: "edit-button"
+      - if can?(:destroy, @listing)
+        = link_to listing_path(@listing.id), method: :delete, class: "btn btn-danger rounded-0 view-listing-button", id: "view-listing-delete-button", data: { confirm: "Are you sure you want to delete this listing?" } do
+          Delete Listing &nbsp

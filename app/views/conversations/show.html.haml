@@ -1,0 +1,54 @@
+.container.conversations-window
+  .row.mt-4
+    .col-3.bg-light-green.rounded-left
+      %h4.mb-4.mt-2.pt-1.text-center.text-white Conversations
+      %ul.list-group.mb-3.conversations-list
+        - @conversations.each do |conversation|
+          = link_to conversation do
+            - if @conversation == conversation
+              - bg_color = "bg-dark-green"
+            - else
+              - bg_color = "bg-light-green"
+            %li.list-group-item.rounded.border-0.text-white.mb-1.p-0{class: bg_color}
+              .left-right
+                .w-25.d-flex.align-items-center
+                  .square-div
+                    - listingContent = conversation.listing.listing_content
+                    = image_tag("#{listingContent.listing_url}", class: "cropped-image")
+                %span.line-clamp-3.w-75.text-left
+                  %span
+                    = listingContent.title
+    .col-9.conversations-chat-column
+      #chat-container
+        .row.bg-dark-green.rounded-right.p-2.conversations-top-row
+          .col-6.text-right
+            // Display the other user's name
+            - if current_user == @conversation.buyer
+              = link_to @conversation.seller.givenname, @conversation.seller, class: "conversation-name"
+            - else
+              = link_to @conversation.buyer.givenname, @conversation.buyer, class: "conversation-name"
+          .col-6.text-white.text-right
+            -#These would be link_to's when implemented, and would need to be tested
+            %i.fas.fa-link.mr-2
+            %i.fas.fa-flag.mr-2
+            %i.fas.fa-bell.mr-2
+            %i.fas.fa-times.mr-2
+        .chat
+          %div
+            #chat-box.pb-2
+              - @messages.each do |message|
+                // Other user's messages will be on the left, your messages will be on the right
+                - if current_user == message.user
+                  .d-flex.align-items-end.flex-column.ml-message.mt-2=render 'messages/message', message: message
+                - else
+                  .d-flex.align-items-start.flex-column.mr-message.mt-2=render 'messages/message', message: message
+          .row.conversations-input-box.bg-dark-green
+            // Message input box
+            = form_with(model: @message, class: "w-100", id: "conversations-send-form") do |f|
+              .input-group
+                = f.text_field :content, placeholder: "Say something...", autocomplete: "off", maxlength: "500", class:"form-control", id: "conversations-message-field"
+                .input-group-append
+                  = f.hidden_field :conversation_id
+                  = hidden_field_tag 'conversation_id', @conversation.id
+                  = f.button type: 'submit', onClick: "refreshPage()", class:"btn btn-primary primary-button", id: "conversations-send-button" do
+                    %i.fas.fa-arrow-circle-right.conversations-send-icon

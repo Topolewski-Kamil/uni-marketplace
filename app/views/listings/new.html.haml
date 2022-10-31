@@ -1,0 +1,50 @@
+.card
+  = content_for(:terms) do
+    I've read and accepted the 
+    // Redirects to site policies in a new tab
+    = link_to 'Terms and Conditions', "/policies/site_policy", target: :_blank
+
+  = simple_form_for :listing, url: listings_path, html: { data: {cancel_path: listings_path}}, defaults: {class: "listing-input"} do |l| # NOTE: cancel_path becomes cancel-path in the data attribute
+    .card-body
+      #listing-details
+        %h2.mb-4 Listing Details
+        // Title
+        = l.input :title, input_html: {autocomplete: "off", class: 'required-details', id: 'title-field', maxlength: 250}
+        #title-limit.text-danger.new-listing-warning
+          Title character limit reached
+        // Description
+        = l.input :description, as: :text, input_html: {class: 'expandable-input required-details', id: 'description-field', maxlength: 2000}
+        #description-length-left.new-listing-warning
+        // Category
+        = l.input :category, collection: @categories, input_html: {class: 'listing-select2 required-details', id: 'test2'},  include_hidden: false
+        // Price
+        = l.input :price, as: :numeric, input_html: {autocomplete: "off", class: 'required-details', id: 'price', min: '0', max: '10000', step: '1'}
+        #invalid-price.text-danger.new-listing-warning
+          Invalid price: has to be within £0 - £10000 range
+        // Location
+        = l.input :location, collection: ListingContent::LOCATION_OPTIONS, input_html: {class: 'listing-select2 required-details', id: 'location'},  include_hidden: false
+        #post-code-input
+          // Post code if applicable
+          = l.input :post_code, label: 'Postal Code (First 3 characters)', input_html: {id: 'post-code', maxlength: 3}, type: 'hidden', required: false
+          #invalid-post-code.text-danger.new-listing-warning
+            Invalid post code
+        // Delivery options
+        = l.input :delivery_options, input_html: {class: 'listing-select2 required-details', multiple: "multiple"}, collection: ListingContent::DELIVERY_OPTIONS, include_hidden: false
+
+      #optional-details
+        %h2.mb-4 Optional Details
+        // Condition
+        = l.input :condition, collection: ListingContent::CONDITIONS, include_blank: true, input_html: {class: 'listing-select2'}
+        // Payment options
+        = l.input :payment_options, collection: ListingContent::PAYMENT_OPTIONS, include_hidden: false, input_html: {class: 'listing-select2', multiple: "multiple"}
+        // Images
+        = l.input :images, as: :file, input_html: {multiple: true, id: 'images', accept:"image/png, image/jpeg"}
+        #error-message.new-listing-warning
+        = l.input :terms, as: :fake_checkbox, wrapper: :vertical_boolean, label: content_for(:terms)
+    .card-footer
+      = l.button :submit, class: "btn-primary", id: "submit-button"
+      = l.button :button, "Next", type: "button", name: "next", class: "btn-primary", id: "next-button", style: "display: none"
+      = l.button :button, "Another", type: "button", name: "another", class: "btn-primary", id: "another-button", style: "display: none"
+      .float-right
+        = l.button :button, "Cancel", type: "button", name: "cancel", class: "btn-outline-secondary", id: "cancel-button" # Redirects to listing_path
+        = l.button :button, "Back", type: "button", name: "back", class: "btn-outline-secondary", id: "back-button", style: "display: none"

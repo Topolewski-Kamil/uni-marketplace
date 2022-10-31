@@ -1,0 +1,105 @@
+%h1
+  %strong
+    Moderation Queue
+%hr
+%p
+- if (@listings_for_approval.size != 0)
+  .row
+    .col-md-4#review-listing-category.text-break
+      //Category, Photo
+      %p.text-muted
+        = @current_content.category.name
+      .w-100
+        .square-div
+          = link_to "#image-carousel-modal", "data-toggle" => "modal" do
+            = image_tag("#{@urls.first}", class: "cropped-image") 
+      //User, rating, contact, report
+      .mt-3
+        .left-right
+          %span
+            =link_to @current_listing.user.show_user, @current_listing.user
+
+          .btn.stars
+            %i.fas.fa-star
+            %i.fas.fa-star
+            %i.fas.fa-star
+            %i.fas.fa-star
+            %i.fas.fa-star
+    .col-md-5#review-listing-details.text-break
+      //Title, price, details      
+      %strong
+        %h4
+          = @current_content.title
+      .listing-price
+        = @current_content.display_price
+      %hr
+      %strong
+        About this item
+      .left-right.mt-3
+        %span.text-muted
+          %i.fas.fa-clipboard
+          Item condition
+        %span.text-right
+          = @current_content.print_condition
+      .left-right.mt-3
+        %span.text-muted
+          %i.fas.fa-map-marker-alt
+          Location
+        %span.text-right
+          .text-uppercase.d-inline= @current_content.post_code
+          = @current_content.location
+      .left-right.mt-3
+        %span.text-muted
+          %i.fas.fa-clock
+          Last modified:
+        %span.text-right
+          = @current_content.print_last_modified
+      %p.mt-3
+        = @current_content.description
+      %hr
+      %strong
+        Payment & Delivery
+      .left-right.mt-3
+        %span.text-muted
+          %i.fas.fa-credit-card
+          Payment options
+        %span.text-right
+          = @current_content.print_payment_options
+      .left-right.mt-3.mb-3
+        %span.text-muted
+          %i.fas.fa-truck 
+          Delivery Options
+        %span.text-right
+          = @current_content.print_delivery_options
+
+      .left-right
+        = link_to listing_path(@current_listing.id), method: :patch, id: "accept_listing#{@current_listing.id}", class: "btn btn-primary rounded-0 review-listing-button", data: { confirm: "Are you sure?" } do
+          Approve &nbsp
+          %i.fas.fa-check
+        = link_to edit_listing_path(@current_listing.id), id: "edit_listing#{@current_listing.id}", class: "btn btn-warning rounded-0 review-listing-button" do
+          Edit &nbsp
+          %i.fas.fa-edit
+        = link_to listing_path(@current_listing.id, commit: 'reject'), method: :delete, id: "reject_listing#{@current_listing.id}", class: "btn btn-danger rounded-0 review-listing-button", data: { confirm: "Are you sure?" } do
+          Reject &nbsp
+          %i.fas.fa-times
+    .col-md-3#review-listing-list
+      %h6.text-right.mb-3
+        %strong Pending Listings (#{@listings_for_approval.size})
+      #review-listing-list-container
+        // Add the 'clicked' class to the first link div
+        - clicked = ""
+        - @listings_for_approval.each do |listing|
+          - content = listing.listing_content
+          - if @current_listing.id == content.id
+            - clicked = " clicked"
+          %div{class: "listing_div mb-2#{clicked}"}
+            = link_to listing_review_path(:clicked_listing_id => content.listing_id), id: "select_listing#{content.listing_id}", class: "text-dark text-break" do
+              .left-right
+                .w-25.d-flex.align-items-center
+                  .square-div
+                    = image_tag("#{content.listing_url}", class: "cropped-image")
+                %span.line-clamp-3.w-75.text-left.pl-3= content.title
+          - clicked = ""
+  = render 'image_carousel'
+- else
+  %p There are no listings awaiting moderation.

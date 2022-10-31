@@ -1,0 +1,31 @@
+.container.conversations-window
+  - if @conversations.size == 0
+    // Displayed if there are no conversations
+    .d-flex.justify-content-center.align-items-center.mt-5
+      %h6 You don't have any ongoing convesations.
+  - else
+    .row.mt-4
+      .col-3.bg-light-green.rounded-left
+        %h4.mb-4.mt-2.pt-1.text-center.text-white Conversations
+        // Conversations list sidebar
+        %ul.list-group.mb-3.conversations-list
+          - @conversations.each do |conversation|
+            = link_to conversation do
+              // Currently selected conversations are highlighted with a darker background colour
+              - if @conversation == conversation
+                - bg_color = "bg-dark-green"
+              - else
+                - bg_color = "bg-light-green"
+              %li.list-group-item.rounded.border-0.text-white.mb-1.p-0{class: bg_color}
+                .left-right
+                  .w-25.d-flex.align-items-center
+                    // Sidebar conversation image thumbnail
+                    .square-div
+                      - listingContent = conversation.listing.listing_content
+                      = image_tag("#{listingContent.listing_url}", class: "cropped-image")
+                  %span.line-clamp-3.w-75.text-left
+                    %span
+                      = listingContent.title
+      .col-md-9.d-flex.align-items-center#conversations-tip
+        %h6 Click on a conversation on the left sidebar in order to see messages.
+

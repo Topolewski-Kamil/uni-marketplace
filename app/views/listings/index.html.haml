@@ -1,0 +1,23 @@
+- @shelves.each do |shelf_name, listing_collection, index|
+    - listings = listing_collection[:content]
+    .pb-5.mt-5{class: listing_collection[:class]}
+        %h1.mb-4.text-dark #{listing_collection[:title]}
+        - if !listings.empty?
+            .row
+                - listings.each do |listing|
+                    .col-lg-4.col-md-6.mb-4
+                        // Only show approved listings on featured page
+                        - listing_content = listing.listing_content(approved= true)
+                        .card.p-3.border-0
+                            = link_to listing do
+                                .card-body.p-0
+                                    .square-div.mb-2
+                                        // Listing image
+                                        = image_tag("#{listing_content.listing_url}", class: 'card-img-top cropped-image', alt: "")
+                                    .left-right.text-muted.mb-2
+                                        // Listing details
+                                        %span= listing_content.category.name
+                                        %span.text-dark= listing_content.display_price
+                                    %h5.text-dark.line-clamp-2.pb-1= listing_content.title
+        - else
+            %p There are none of these listings available

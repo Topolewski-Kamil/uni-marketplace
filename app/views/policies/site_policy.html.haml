@@ -1,0 +1,14 @@
+.container
+    %h1.display-3.text-dark Site Policies
+    %p Please review the website policy before selling or buying any items.
+
+    .alert.alert-primary
+        View the Covid-19 guidance for buying and selling using this platform
+        = link_to "covid-19" do
+            here
+
+    .row.shadow-sm.p-3.mb-5.bg-white.rounded.flex-column=@parsed
+    // =@parsed will render the markdown file site_policy.md
+    
+    .text-center
+        %p We reserve the right to modify this privacy policy at any time, so please review it frequently. Please contact us if you have any inquiries.

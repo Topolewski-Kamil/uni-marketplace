@@ -1,0 +1,10 @@
+.container
+    %h1.display-3.text-dark COVID-19
+    %p COVID-19 guidance for buying and selling using UoS marketplace.
+
+    .alert.alert-primary
+        For the latest updates regarding Covid-19 guidance, please visit the
+        = link_to "https://www.sheffield.ac.uk/coronavirus" do
+            official university website
+    .row.shadow-sm.p-3.mb-5.bg-white.rounded.flex-column=@parsed
+    // =@parsed will render the markdown file covid-19.md

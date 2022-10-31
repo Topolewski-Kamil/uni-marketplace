@@ -1,0 +1,15 @@
+@import "bootstrap/functions";
+@import "bootstrap/variables";
+
+$footer-height: 75px;
+$environment-notice-height: 2rem;
+$theme-colors: (
+    "primary": #579532,
+    "dark": #333,
+    "secondary": #007bff,
+    "originalSecondary": #6c757d
+);
+
+.button-warning{
+    color: #fff;
+}

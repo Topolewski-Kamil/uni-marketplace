@@ -1,0 +1,17 @@
+development:
+  adapter: postgresql
+  database: software_hut_project_dev
+  min_messages: warning
+  
+  # comment/remove these lines if running WSL on Windows
+  host: localhost
+  username:
+
+test:
+  adapter: postgresql
+  database: software_hut_project_test
+  min_messages: warning
+
+  # comment/remove these lines if running WSL on Windows
+  #host: localhost
+  #username:

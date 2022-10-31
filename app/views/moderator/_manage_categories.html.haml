@@ -1,0 +1,35 @@
+.modal.hide.fade#manage_categories{:role => "dialog", :aria-hidden => "true"}
+    .modal-dialog.modal-dialog-centered{:role => "document"}
+        .modal-content
+            .modal-header
+                %h4.modal-title Manage Categories
+                %button.close{data: {dismiss: "modal"}}
+                    %i.fas.fa-times
+            .modal-body
+                // Alerts for adding/deleting categories
+                .environment-notive.alert.alert-info#categories_submit_alert Category added!
+                .environment-notive.alert.alert-info#categories_delete_alert Category deleted!
+                %form
+                    .form-group
+                        %label 
+                            %strong Add new category
+                        .left-right
+                            %input.form-control#manage_categories_name_input{:placeholder => "Category Name", :name => "category_name"}
+                            %button.btn.btn-primary#manage_categories_add_button.ml-2{:type => "button"}
+                                %i.fas.fa-plus
+                            %button.btn.btn-outline-danger#enable_deleting.ml-2{:type => "button", :onclick => "enable_delete_buttons()"}
+                                %i.fas.fa-minus
+                %hr.mt-4
+                %strong Category list
+                .table-responsive.moderator-function-table
+                    %table.table.table-sm.table-striped.mt-2
+                        %tbody#manage_categories_tbody
+                            // Category list
+                            - @categories.each do |category|
+                                %tr
+                                    %td.align-middle=category.name
+                                    %td.align-middle.text-right
+                                        %button.btn-sm.btn-danger.category_delete_btn{:id => category.id, :title => "Delete", :onclick => "delete_category(event)", :data => {"category": - category.name}}
+                                            %i.fas.fa-minus
+            .modal-footer
+                %button.btn.btn-secondary{:type=>"button", "data-dismiss"=>"modal"}Close

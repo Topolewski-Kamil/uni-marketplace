@@ -1,0 +1,29 @@
+.row.justify-content-between
+    .col-lg-2#moderator-utilities.bg-super-light-green
+        .d-flex.flex-column
+            %h2
+                %strong Utilities
+            = button_to "Review Listings (#{@listings_to_moderate})", listing_review_path, {class: "btn btn-primary w-100 mt-3"}
+            // NOT IMPLEMENTED:
+            %button.btn.btn-primary.mt-3 Listing Reports (0)
+            // NOT IMPLEMENTED:
+            %button.btn.btn-primary.mt-3 Chat Reports (0)
+            = link_to "Lookup User", "#lookup_users", "data-toggle" => "modal", "data-backdrop" => "static", class: "btn btn-primary mt-3"
+            = link_to "Edit listings", "#edit_listings", "data-toggle" => "modal", "data-backdrop" => "static", class: "btn btn-primary mt-3"
+            %br/
+            = link_to "Edit Categories", "#manage_categories", "data-toggle" => "modal", "data-backdrop" => "static", class: "btn btn-primary mt-3"
+            = link_to "Site Message", "#template", "data-toggle" => "modal", "data-backdrop" => "static", class: "btn btn-primary mt-3"
+            = link_to "Edit Site Policy", url_for(controller: 'policies', action: 'edit', page: 'site_policy'), class: "btn btn-primary mt-3"
+            = link_to "Edit COVID Policy", url_for(controller: 'policies', action: 'edit', page: 'covid-19'), class: "btn btn-primary mt-3"
+    .col-lg-9#moderator-statistics.bg-super-light-green
+        .row
+            .col-lg-3 
+                %h2
+                    // NOT IMPLEMENTED:
+                    %strong Statistics
+            .col-lg-9
+// Render all of the required modals. Much easier to do & test this than to render through javascript
+= render 'template'
+= render 'manage_categories'
+= render 'edit_listings'
+= render 'lookup_users'

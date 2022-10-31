@@ -1,0 +1,19 @@
+/*
+  *= require bootstrap_setup
+  *= require font_awesome_setup
+  *= require select2
+  *= require select2-bootstrap
+  *= require layout
+  *= require forms
+  *= require warning_page
+  *= require custom_flash
+  *= require environment_notice
+  *= require listing_review
+  *= require searchbar
+  *= require user_profile
+  *= require moderator_dashboard
+  *= require view_listing
+  *= require conversations
+  *= require new_listing
+  *= require manage_categories
+*/

@@ -1,0 +1,25 @@
+@import 'variables';
+
+.modal-carousel-image{
+    max-width: 85vw !important;
+    max-height: 85vh !important;
+}
+.modal-image-content{
+    background-color: transparent !important;
+    border: none !important;
+    width: auto !important;
+}
+.modal-image-body{
+    padding: 0 !important;
+}
+.modal-image-dialog{
+    max-width: 100% !important;
+}
+.modal-image{
+    padding-right: 0 !important;
+}
+.view-listing-button{
+    width: 20%;
+    min-width:100px;
+    margin-left:10px;
+  }

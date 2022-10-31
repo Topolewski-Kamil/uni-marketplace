@@ -1,0 +1,30 @@
+.modal.hide.fade#edit_listings{:role => "dialog", :aria-hidden => "true"}
+    .modal-dialog.modal-dialog-centered{:role => "document"}
+        .modal-content
+            .modal-header
+                .d-flex.w-100.justify-content-between
+                    %h4.modal-title Edit listings
+                    // Loading spinner
+                    .spinner-border#edit_listing_lookup_spinner{ :role => "status"}
+                        %span.sr-only Loading...
+                %button.close{data: {dismiss: "modal"}}
+                    %i.fas.fa-times
+            .modal-body
+                %form#listing_search_form
+                    .form-group.row.justify-content-around
+                        .flex-grow-1.mx-3
+                            .input-group                        
+                                .input-group-prepend
+                                    %label.input-group-text Search
+                                %input.form-control#edit-listings-title_input{:placeholder => "Title", "aria-label" => "Title", :name => "title", :autocomplete =>"off"}
+                                .input-group-append
+                                    %button.btn.btn-originalSecondary#edit-listings-search_button{:type=>"Button", :onclick=>"listing_search()", "aria-label" => "Search Button"}
+                                        %i.fas.fa-search
+
+            .table-responsive.moderator-function-table
+                %table.table.table-striped.mt-2
+                    %tbody#listing_tbody	
+                    // Search results will be appended to this table
+
+            .modal-footer
+                %button.btn.btn-secondary{:type=>"button", "data-dismiss"=>"modal"}Close

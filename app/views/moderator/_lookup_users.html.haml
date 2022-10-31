@@ -1,0 +1,37 @@
+.modal.hide.fade#lookup_users{:role => "dialog", :aria-hidden => "true", :data_id => @current_user_id }
+	.modal-dialog.modal-dialog-centered.modal-lg{:role => "document"}
+		.modal-content
+			.modal-header
+				.d-flex.w-100.justify-content-between
+					%h4.modal-title Lookup users
+					// Loading spinner
+					.spinner-border#lookup_spinner{ :role => "status"}
+						%span.sr-only Loading...
+				%button.close{data: {dismiss: "modal"}}
+					%i.fas.fa-times
+			.modal-body
+				%form#lookup_form
+					.form-group.row.justify-content-around
+						.flex-grow-1.mx-3
+							.input-group#lookup_input_group                        
+								.input-group-prepend
+									%label.input-group-text Search
+								%input.form-control#query_input{:placeholder => "Name, username or email", "aria-label" => "Name, username or email", :name => "query_input", :autocomplete =>"off"}
+								.input-group-append
+									%button.btn.btn-originalSecondary#search_button{:type=>"Button", :onclick=>"user_search()", "aria-label" => "Search Button"}
+										%i.fas.fa-search
+			.table-responsive.moderator-function-table
+				%table.table.table-striped.mt-2
+					%tbody#user_lookup_tbody
+					// Search results will be appended to this table
+
+
+
+			.modal-footer.justify-content-between
+				%p Click name to reveal email
+				.row
+					.mx-3
+						%button.btn.btn-outline-primary{:type=>"Button", :onclick=>"show_moderators()"} Show moderators
+					%button.btn.btn-secondary{:type=>"button", "data-dismiss"=>"modal"}Close
+
+
